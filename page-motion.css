@@ -1,0 +1,5 @@
+/* Outgoing content is an inert visual snapshot; it never covers controls or focus. */
+.motion-outgoing{position:fixed;inset:0;overflow:hidden;pointer-events:none!important;z-index:4;contain:paint}
+.motion-outgoing-content{pointer-events:none!important;background:var(--canvas)}
+.motion-outgoing-content *{pointer-events:none!important;animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.motion-outgoing{display:none!important}}

@@ -1,0 +1,4 @@
+export function companionFields(d,esc){
+ const input=(name,label,max=100)=>`<label>${label}<input name="${name}" value="${esc(d[name]||'')}" maxlength="${max}"></label>`;
+ return `<h3>伴学详情补充资料（选填）</h3><div class="two-columns"><label>性别<select name="gender">${['暂不填写','男','女'].map(v=>`<option ${d.gender===v?'selected':''}>${v}</option>`).join('')}</select></label>${input('major','专业')}${input('identity','身份')}${input('tags','个人标签')}${input('specialty','特长')}${input('experience','伴学经历',500)}<label>出生年份<input name="birthYear" type="number" min="1900" max="${new Date().getFullYear()}" value="${esc(d.birthYear||'')}"></label>${input('address','所在区域（不填写详细住址）',200)}<label>服务方式<select name="methods"><option value="">暂不填写</option>${['线下陪伴','线上陪伴','线下 / 线上陪伴'].map(v=>`<option ${d.methods===v?'selected':''}>${v}</option>`).join('')}</select></label></div><p class="muted">补充资料只在本人伴学详情中展示。不要填写身份证、门牌号等敏感信息。</p>`;
+}

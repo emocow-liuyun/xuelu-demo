@@ -1,0 +1,23 @@
+/* 卡片悬停：只动 translate，与 page-motion 的 transform 互不覆盖。
+   阴影用统一 token，不新增自定义色。 */
+@media(hover:hover) and (pointer:fine){
+ #app .content :is(.card,.site-panel,.order,.quick,.learning-card,.gk-uni,.ex-card,.stat,.booking-summary,.gk-rank-card,.ex-stat){
+  position:relative;
+  translate:0 0;
+  transition:translate var(--dur-base) cubic-bezier(.22,1,.36,1),box-shadow var(--dur-base) ease,border-color .2s ease,background-color var(--dur-fast) ease;
+ }
+ #app .content :is(.card,.site-panel,.order,.quick,.learning-card,.gk-uni,.ex-card,.stat,.booking-summary,.gk-rank-card,.ex-stat):hover{
+  translate:0 -4px;
+  box-shadow:var(--shadow-lift);
+  border-color:var(--line-strong);
+  z-index:1;
+ }
+ /* 旧的 transform hover 不能在 WAAPI 入场结束后回弹 */
+ #app .content .card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ #app .content :is(.card,.site-panel,.order,.quick,.learning-card,.gk-uni,.ex-card,.stat,.booking-summary,.gk-rank-card,.ex-stat),
+ #app .content :is(.card,.site-panel,.order,.quick,.learning-card,.gk-uni,.ex-card,.stat,.booking-summary,.gk-rank-card,.ex-stat):hover{
+  translate:none;transition:none!important;
+ }
+}

@@ -1,0 +1,554 @@
+/* ============================================================
+   学鹭伴学 · 设计令牌（Design Tokens）
+   ------------------------------------------------------------
+   参考方向（awesome-design-md）：
+   · Zapier  —— 暖奶油画布 / 咖啡墨色 / 橙色只做 CTA / 12px 圆角
+   · Airbnb  —— 全站单一阴影档，留白承载层级
+   · Linear  —— 1px hairline 描边，胶囊只给徽标
+   · Wise    —— 语义色与品牌色分离
+
+   纪律：橙色是「动作信号」，不是背景色。
+        画布暖、墨色暖、橙色稀缺 —— 三者构成唯一的转换语言。
+   ============================================================ */
+:root{
+ /* ---------- 品牌：橙色只保留三个语义角色 ---------- */
+ --brand:#f37021;           /* 仅：主按钮填充、价格、选中指示器 */
+ --brand-ink:#b44d0e;        /* 唯一橙色文字色：与 #f37021 同色相，白/暖底/tint 均 ≥4.7:1 */
+ --brand-deep:#a8400f;      /* 兼容旧引用，逐步收敛到 --brand-ink */
+ --brand-tint:#fdf1e4;      /* 仅：徽标底 / 选中态浅底 */
+ --brand-line:#f2d5bd;      /* 仅：橙色系描边 */
+
+ /* ---------- 表面：暖度来自中性色，不来自橙 ---------- */
+ --canvas:#fffdfa;          /* 页面底 —— 暖白，非纯白 */
+ --canvas-soft:#faf5ee;     /* 次级带 / 分区底 */
+ --surface:#ffffff;         /* 卡片 */
+ --surface-soft:#fbf7f1;    /* 卡片内嵌区域 */
+ --line:#ece2d6;            /* hairline 常规 */
+ --line-strong:#dccdb9;     /* 输入框 / 需要强调的边界 */
+
+ /* ---------- 文字：咖啡暖墨阶（全部经对比度实测） ---------- */
+ --ink:#241a12;             /* 标题 —— 深咖，非纯黑。白底 17.0:1 */
+ --ink-secondary:#5d4b3d;   /* 正文 —— 10.1:1 */
+ --muted:#6d5947;           /* 辅助 —— 白底 6.6:1 / 暖底 6.1:1 */
+ --mute-soft:#786755;       /* 细注 —— 暖底 5.0:1，小字也达标 */
+
+ /* ---------- 语义色：与品牌色彻底分离 ---------- */
+ --positive:#2f7d54;
+ --positive-tint:#e8f4ec;
+ --warning:#a8730f;
+ --warning-tint:#fdf3e0;
+ --danger:#b3371f;
+ --danger-tint:#fbeae6;
+
+ /* ---------- 圆角：5 档，不多不少 ---------- */
+ --radius-xs:6px;           /* 输入框、内联标签 */
+ --radius-sm:12px;          /* 按钮、卡片 —— 品牌签名档 */
+ --radius-md:16px;          /* 面板 */
+ --radius-lg:24px;          /* 品牌欢迎区 */
+ --radius-pill:9999px;      /* 仅：徽标、开关、筛选胶囊 */
+
+ /* ---------- 阴影：全站单一档（Airbnb 纪律） ---------- */
+ --shadow:0 1px 2px rgba(52,32,16,.04),0 4px 12px rgba(52,32,16,.05);
+ --shadow-lift:0 2px 4px rgba(52,32,16,.05),0 12px 28px rgba(52,32,16,.09);
+
+ /* ---------- 间距 ---------- */
+ --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+ --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+
+ /* ---------- 字体 ---------- */
+ --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+ --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+
+ /* ---------- 字阶：9 档，替代散落的 38 种字号 ----------
+    UI 正文压到 13px 档，标题用 1.5 倍级差，靠字重与颜色分层而不是十进制微调。 */
+ --text-2xs:10px;           /* 徽标、小标签（仅大写/短词） */
+ --text-xs:11.5px;          /* 元信息、辅助说明 */
+ --text-sm:12.5px;          /* 次级正文 */
+ --text-base:13.5px;        /* 正文基准 */
+ --text-md:16px;            /* 卡片标题、强调正文 */
+ --text-lg:18px;            /* 小节标题 */
+ --text-xl:22px;            /* 页面标题 */
+ --text-2xl:28px;           /* 品牌区标题 */
+ --text-3xl:34px;           /* 展示级 */
+
+ /* ---------- 行高：4 档 ---------- */
+ --leading-tight:1.3;       /* 展示标题 */
+ --leading-snug:1.5;        /* 小标题、按钮 */
+ --leading-normal:1.7;      /* 正文 */
+ --leading-relaxed:1.85;    /* 长段落、说明 */
+
+ /* ---------- 动效：两档时长 + 一条缓动曲线 ---------- */
+ --ease:cubic-bezier(.22,1,.36,1);   /* 落座：快出慢停 */
+ --dur-fast:150ms;                   /* 颜色、边框、透明度 */
+ --dur-base:240ms;                   /* 位移、阴影 */
+
+ /* ---------- 图标/插画尺寸：与文字系统分开，不参与字阶 ---------- */
+ --icon-sm:40px;            /* 空态占位 */
+ --icon-md:64px;            /* 详情页图标 */
+ --icon-lg:76px;            /* 卡片插画 */
+ --icon-xl:143px;           /* Hero 主插画 */
+
+ /* ---------- 字重：4 档（去掉 550/650/750 这类非标值） ---------- */
+ --weight-regular:400;
+ --weight-medium:500;
+ --weight-semibold:600;
+ --weight-bold:700;
+
+ /* ---------- 兼容旧变量名（其他 CSS 仍在引用） ---------- */
+ --ink-soft:var(--ink-secondary);
+ --green:var(--positive);
+ font-family:var(--font-sans);
+ color:var(--ink);
+ background:var(--canvas);
+ -webkit-font-smoothing:antialiased;
+ -moz-osx-font-smoothing:grayscale;
+}
+
+body{background:var(--canvas);color:var(--ink)}
+
+/* PC-only product: small windows keep the desktop canvas, without mobile reflow. */
+html,body{min-width:1200px}
+.mobile-bottom-nav,.mobile-shortcuts{display:none!important}
+
+button,a,input,select,textarea{transition:background-color var(--dur-fast) ease,border-color var(--dur-fast) ease,box-shadow var(--dur-base) ease,opacity var(--dur-fast) ease}
+button:active{opacity:.78}
+button:disabled{cursor:not-allowed}
+:focus-visible{outline:2px solid var(--brand-deep);outline-offset:3px}
+button[hidden],[hidden]{display:none!important}
+
+/* ============================================================
+   外壳：侧栏 + 顶栏
+   ============================================================ */
+.shell{grid-template-columns:248px minmax(0,1fr)}
+.sidebar{
+ width:auto;padding:32px 20px 20px;
+ background:var(--canvas-soft);
+ border-right:1px solid var(--line);
+ z-index:3;
+}
+.logo{font-size:var(--text-xl);letter-spacing:.2px;color:var(--ink);gap:10px;white-space:nowrap;font-weight:var(--weight-bold)}
+.mark{background:var(--ink);border-radius:var(--radius-sm);font-size:var(--text-xl);width:44px;height:44px;padding:4px;display:grid;place-items:center;color:#fff}
+.mark-egret{flex:0 0 44px;overflow:hidden;padding:2px;background:var(--surface)}
+.mark-egret img{display:block;width:100%;height:100%;object-fit:contain}
+.sublogo{margin:8px 0 40px 48px;letter-spacing:2.4px;font-size:var(--text-2xs);color:var(--mute-soft);font-weight:var(--weight-semibold)}
+.nav-label{color:var(--mute-soft);font-size:var(--text-2xs);letter-spacing:1.8px;margin-left:12px;font-weight:var(--weight-semibold)}
+
+.nav{gap:2px}
+.nav button{
+ padding:12px 12px;border-radius:var(--radius-xs);
+ color:var(--ink-secondary);font-size:var(--text-base);border:1px solid transparent;
+ font-weight:var(--weight-medium);
+}
+.nav button span{display:inline-grid;place-items:center;width:22px;font-size:var(--text-lg);margin-right:10px;vertical-align:middle;opacity:.8}
+.nav button:hover{background:var(--surface);color:var(--ink)}
+.nav button.active{
+ background:var(--surface);border-color:var(--line);color:var(--ink);font-weight:var(--weight-semibold);
+ box-shadow:inset 2px 0 0 var(--brand);
+}
+.nav button.active span{opacity:1}
+
+.side-bottom{
+ background:var(--surface);border:1px solid var(--line);
+ color:var(--muted);border-radius:var(--radius-sm);padding:16px;line-height:var(--leading-relaxed);font-size:var(--text-xs);
+}
+.side-bottom strong{color:var(--ink);font-size:var(--text-sm);display:block;margin-bottom:4px}
+
+.topbar{
+ height:auto;min-height:68px;background:rgba(255,253,250,.86);
+ border-bottom:1px solid var(--line);padding:12px 32px;gap:12px;backdrop-filter:blur(12px)
+}
+.crumb{color:var(--muted);line-height:var(--leading-normal);font-size:var(--text-sm);flex-shrink:0}
+.top-right{gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.role-switch,.location-button{
+ background:var(--surface);color:var(--ink-secondary);border:1px solid var(--line);
+ padding:8px 12px;border-radius:var(--radius-pill);min-height:32px;font-size:var(--text-xs);font-weight:var(--weight-medium)
+}
+.role-switch:hover,.location-button:hover{background:var(--surface-soft);border-color:var(--line-strong);color:var(--ink)}
+.demo-badge{background:var(--warning-tint);color:var(--warning);border-radius:var(--radius-pill);font-size:var(--text-2xs);padding:6px 10px;font-weight:var(--weight-semibold);border:1px solid #f0dfbe}
+.avatar{background:var(--brand-tint);color:var(--brand-ink);border:1px solid var(--brand-line);font-size:var(--text-xs);font-weight:var(--weight-bold)}
+/* 底部为悬浮助手球留出安全距，避免遮挡最后一屏的按钮与状态 */
+.content{max-width:1400px;padding:24px 32px 32px}
+/* 底部为悬浮助手球留出安全距（用更高特异性，覆盖 responsive.css 的 padding-top 缩写） */
+#app .content{padding-bottom:96px}
+
+/* ============================================================
+   品牌欢迎区：从「橙色大面积」改为「咖啡墨深底」
+   橙色只在按钮、价格、小标记上出现，才守得住动作信号的稀缺性
+   ============================================================ */
+.brand-welcome{
+ background:var(--ink);position:relative;isolation:isolate;
+ display:grid;grid-template-columns:1fr 268px;min-height:212px;
+ border-radius:var(--radius-lg);padding:32px 40px;color:#fff;overflow:hidden;
+ margin:0 0 24px;box-shadow:var(--shadow);
+}
+.brand-welcome::before{
+ content:"";width:430px;height:430px;position:absolute;right:-140px;top:-190px;
+ border-radius:50%;border:1px solid rgba(255,255,255,.10);z-index:-1
+}
+.brand-welcome::after{
+ content:"";position:absolute;left:-70px;bottom:-150px;width:390px;height:210px;
+ border-radius:50%;background:rgba(243,112,33,.10);transform:rotate(14deg);z-index:-1
+}
+.brand-welcome-copy{align-self:center;z-index:1;max-width:580px}
+.brand-overline{display:flex;gap:10px;align-items:center;font-size:var(--text-2xs);letter-spacing:2px;font-weight:var(--weight-semibold);color:#cbb8a6}
+.brand-overline i{display:block;width:18px;height:1px;background:rgba(255,255,255,.35)}
+.brand-welcome h2{margin:16px 0 10px;font-size:var(--text-2xl);letter-spacing:.2px;line-height:var(--leading-snug);font-weight:var(--weight-bold);color:#fff;text-wrap:balance}
+.brand-welcome p{font-size:var(--text-sm);line-height:var(--leading-relaxed);color:#c9b8a8;max-width:410px;margin:0 0 20px}
+.brand-signature{font-size:var(--text-2xs);letter-spacing:2px;font-weight:var(--weight-semibold);color:#a89383}
+.brand-signature b{font-weight:var(--weight-regular);margin-left:12px;font-size:var(--text-md);vertical-align:middle;color:var(--brand)}
+.brand-mascot-stage{position:relative;min-width:0;display:grid;place-items:center;align-self:stretch}
+.brand-orbit{position:absolute;width:196px;height:196px;border-radius:50%;background:rgba(243,112,33,.12);border:1px solid rgba(255,255,255,.09);right:12px;bottom:-40px}
+.brand-mascot{width:228px;max-width:100%;height:auto;position:relative;z-index:1;align-self:center;animation:mascot-settle .6s cubic-bezier(.22,1,.36,1) both}
+.brand-spark{position:absolute;color:var(--brand);z-index:2;font-size:var(--text-xl);opacity:.85}
+.brand-spark-one{right:2px;top:14px}
+.brand-spark-two{left:2px;top:74px;font-size:var(--text-base);opacity:.55}
+.brand-mascot-caption{
+ position:absolute;right:2px;bottom:0;padding:6px 10px;background:var(--surface);
+ border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink-secondary);
+ font-size:var(--text-2xs);letter-spacing:1.6px;border-radius:var(--radius-pill);z-index:2
+}
+@keyframes mascot-settle{from{opacity:0;transform:translateY(-12px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ============================================================
+   按钮：橙色矩形（12px），绝不做成胶囊
+   ============================================================ */
+.primary{
+ background:var(--brand);color:var(--ink);border:1px solid transparent;
+ border-radius:var(--radius-sm);padding:10px 20px;font-size:var(--text-base);font-weight:var(--weight-semibold);
+ min-height:42px;box-shadow:var(--shadow);transition:background-color var(--dur-fast) ease,box-shadow .2s ease;
+}
+.primary:hover{background:#e8641a;box-shadow:var(--shadow-lift)}
+.primary:active{background:#d95a15}
+
+.secondary{
+ background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+ border-radius:var(--radius-sm);padding:10px 16px;font-size:var(--text-sm);min-height:38px;font-weight:var(--weight-medium);
+}
+.secondary:hover{background:var(--surface-soft);border-color:var(--ink-secondary)}
+
+.search{
+ border-radius:var(--radius-pill);border:1px solid var(--line);
+ background:var(--surface);padding:6px 6px 6px 16px;box-shadow:var(--shadow);
+}
+.search input{color:var(--ink);min-height:30px;font-size:var(--text-sm)}
+.search .secondary{border-radius:var(--radius-pill);background:var(--brand);color:var(--ink);border:0;min-width:64px;font-weight:var(--weight-semibold)}
+.search .secondary:hover{background:#e8641a}
+
+/* ============================================================
+   标题与分区
+   ============================================================ */
+.greeting{margin-bottom:20px;gap:16px}
+.greeting h1{font-size:var(--text-xl);letter-spacing:.1px;color:var(--ink);line-height:var(--leading-snug);margin-bottom:4px;font-weight:var(--weight-bold);text-wrap:balance}
+.greeting .muted{color:var(--muted);line-height:var(--leading-normal);font-size:var(--text-sm)}
+.brand-welcome+.greeting{display:none}
+.brand-welcome+.greeting:has(.search){display:flex;justify-content:flex-end}
+.brand-welcome+.greeting:has(.search)>div{display:none}
+
+.section-head{margin:10px 0 16px;gap:16px;align-items:flex-end}
+.section-head h2{font-size:var(--text-lg);font-weight:var(--weight-bold);color:var(--ink);letter-spacing:.1px;line-height:var(--leading-snug);text-wrap:balance}
+.section-head .muted{line-height:var(--leading-relaxed);margin-top:4px}
+
+/* ============================================================
+   卡片：白面 + hairline + 单一阴影
+   ============================================================ */
+.site-panel,.order,.card,.form-page,.stat,.booking-summary,
+.institution-directory .site-panel,.learning-card{
+ background:var(--surface);border:1px solid var(--line);
+ border-radius:var(--radius-sm);box-shadow:var(--shadow);
+}
+.site-panel{padding:24px;margin:0 0 20px}
+.site-panel h3{color:var(--ink);font-size:var(--text-md);line-height:var(--leading-normal);margin-bottom:12px;font-weight:var(--weight-semibold)}
+.site-panel>.body-copy{line-height:var(--leading-relaxed);margin:8px 0 16px;color:var(--ink-secondary)}
+.body-copy,.description{color:var(--ink-secondary);font-size:var(--text-base);line-height:var(--leading-relaxed)}
+
+.institution-directory{gap:16px}
+.institution-directory .site-panel{padding:24px;position:relative;overflow:hidden}
+.institution-directory .site-panel::after{content:"↗";position:absolute;right:20px;top:20px;color:var(--mute-soft);font-size:var(--text-xl)}
+.directory-icon{
+ background:var(--surface-soft);border:1px solid var(--line);
+ width:58px;height:58px;border-radius:var(--radius-md);font-size:var(--text-2xl);margin-bottom:16px;
+ display:grid;place-items:center
+}
+.institution-directory h3{font-size:var(--text-lg);margin-top:0;margin-bottom:8px}
+.institution-directory .muted{color:var(--muted);line-height:var(--leading-normal)}
+.institution-directory .primary{margin-top:16px;border-radius:var(--radius-sm);align-self:stretch}
+
+.quick{border-radius:var(--radius-sm);border:1px solid var(--line);box-shadow:var(--shadow);padding:14px 16px;color:var(--ink)}
+.quick-icon{background:var(--surface-soft);border-radius:var(--radius-xs);border:1px solid var(--line);font-size:var(--text-xl);width:44px;height:44px;display:grid;place-items:center}
+.quick strong{color:var(--ink);font-size:var(--text-sm);font-weight:var(--weight-semibold);margin-bottom:2px}
+.quick small{color:var(--muted);line-height:var(--leading-snug);font-size:var(--text-xs)}
+.arrow{color:var(--mute-soft)}
+
+/* 卡片插画区：取消三种命名色，统一为暖中性，插画本身提供色彩 */
+.peach,.lavender,.mint,.card-image.peach,.card-image.lavender,.card-image.mint{background:var(--surface-soft)}
+.card-image{background:var(--surface-soft);height:150px;border-bottom:1px solid var(--line)}
+.card-image .illustration{filter:none}
+.tag{
+ border:1px solid var(--line);background:var(--surface);color:var(--ink-secondary);
+ border-radius:var(--radius-pill);padding:4px 10px;font-size:var(--text-2xs);font-weight:var(--weight-semibold)
+}
+.card-body{padding:16px}
+.card h3{color:var(--ink);font-size:var(--text-md);line-height:var(--leading-snug);font-weight:var(--weight-semibold)}
+.card-category{color:var(--muted);letter-spacing:.6px;font-size:var(--text-2xs);text-transform:uppercase;font-weight:var(--weight-semibold)}
+.location{color:var(--muted);font-size:var(--text-xs)}
+.card-bottom{border-color:var(--line);padding-top:12px;margin-top:16px}
+.card-bottom button{
+ background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);
+ border-radius:var(--radius-xs);min-height:34px;font-size:var(--text-xs);font-weight:var(--weight-semibold)
+}
+.card-bottom button:hover{background:var(--brand);border-color:var(--brand);color:var(--ink)}
+.price{color:var(--brand-ink);font-size:var(--text-lg);font-weight:var(--weight-bold);letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+.price small{color:var(--muted);font-weight:var(--weight-regular);font-size:var(--text-2xs);letter-spacing:0}
+
+/* ============================================================
+   胶囊只给「筛选/标签/开关」这一族
+   ============================================================ */
+.tabs button,.site-tabs button,.learning-tabs button,.learning-subjects button,.history-tags button{
+ border-radius:var(--radius-pill);border:1px solid var(--line);
+ color:var(--ink-secondary);background:var(--surface);font-size:var(--text-sm);font-weight:var(--weight-medium)
+}
+.tabs button.active,.site-tabs button.active,.learning-tabs button.active,.learning-subjects button.active{
+ background:var(--ink);border-color:var(--ink);color:#fff;font-weight:var(--weight-semibold)
+}
+.tabs button:hover,.site-tabs button:hover,.learning-tabs button:hover,.learning-subjects button:hover{
+ background:var(--surface-soft);color:var(--ink);border-color:var(--line-strong)
+}
+.tabs button.active:hover,.site-tabs button.active:hover{background:var(--ink);color:#fff}
+
+/* site.css 定义了 .filter-bar，theme.css 后加载但需要更高特异性才能稳定覆盖 */
+.content .filter-bar,.content .tutor-filters{
+ background:var(--canvas-soft);border:1px solid var(--line);
+ border-radius:var(--radius-md);padding:16px 20px;
+ display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap
+}
+.content .filter-bar{margin-bottom:20px}
+/* 伴学页的两组筛选合并为一个面板：第二行去掉独立边框与圆角，只留一条分隔线 */
+.content .filter-bar + .tutor-filters{
+ margin:-20px 0 20px;padding-top:14px;border-top:1px dashed var(--line);
+ border-radius:0 0 var(--radius-md) var(--radius-md);
+ border-top-color:var(--line);background:var(--canvas-soft)
+}
+.content .filter-bar label,.content .tutor-filters label{display:grid;gap:6px;font-size:var(--text-2xs);font-weight:var(--weight-semibold);color:var(--muted);letter-spacing:.4px}
+.content .filter-bar select,.content .tutor-filters select{min-width:150px;font-size:var(--text-base);color:var(--ink)}
+.filter-bar select{border-radius:var(--radius-xs)}
+
+.banner-note{
+ background:var(--warning-tint);border:1px solid #f0dfbe;border-radius:var(--radius-sm);
+ color:#6b4c0c;font-size:var(--text-sm);line-height:var(--leading-relaxed);padding:12px 16px
+}
+.banner-note p{margin:6px 0}
+.banner-note strong{color:#6b4c0c}
+.empty{border-color:var(--line-strong);background:var(--surface-soft);color:var(--muted);padding:40px 24px;line-height:var(--leading-relaxed);border-radius:var(--radius-md)}
+
+.profile-banner{background:var(--canvas-soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:24px;color:var(--ink)}
+.profile-icon{background:var(--brand-tint);color:var(--brand-ink);border-radius:var(--radius-xs);border:1px solid var(--brand-line)}
+
+.help-links{gap:0}
+.help-links button{background:transparent;text-align:left;color:var(--ink-secondary);border-bottom:1px solid var(--line);padding:12px 6px;min-height:46px;font-size:var(--text-base)}
+.help-links button:hover{color:var(--ink);background:var(--surface-soft)}
+.help-links button.primary{background:var(--brand);color:var(--ink);border:0;padding:10px 20px;font-weight:var(--weight-semibold)}
+
+.institution-course-icon,.learning-icon,.portrait-placeholder,.tour-photo-empty{background:var(--surface-soft);border-color:var(--line)}
+.learning-card{padding:20px;gap:16px}
+.learning-body h3{color:var(--ink)}
+.learning-path strong{color:var(--brand-ink)}
+.learning-meta,.learning-body .muted{color:var(--muted)}
+.learning-bottom{margin-top:12px}
+.learning-tabs,.learning-subjects{gap:6px}
+.learning-tabs button,.learning-subjects button{min-height:38px;padding:8px 16px}
+
+.tour-row{border-color:var(--line);gap:12px;line-height:var(--leading-normal)}
+.tour-row>strong{color:var(--ink)}
+.tour-row>span{color:var(--muted)}
+.tour-approved{background:var(--positive-tint);color:var(--positive);border-radius:var(--radius-xs)}
+.tour-pending{background:var(--warning-tint);color:var(--warning);border-radius:var(--radius-xs)}
+.fact-grid small{color:var(--muted)}
+.fact-grid strong{color:var(--ink);line-height:var(--leading-normal)}
+
+/* ============================================================
+   表单
+   ============================================================ */
+input,select,textarea{
+ color:var(--ink);border:1px solid var(--line-strong);
+ border-radius:var(--radius-xs);background:var(--surface);line-height:var(--leading-snug);min-height:42px;font-size:var(--text-base)
+}
+input:hover,select:hover,textarea:hover{border-color:var(--muted)}
+input:focus,select:focus,textarea:focus{
+ border-color:var(--brand);box-shadow:0 0 0 3px rgba(243,112,33,.12);outline:none
+}
+input:disabled,select:disabled{background:var(--canvas-soft);color:var(--muted);opacity:1;cursor:not-allowed}
+label{color:var(--ink-secondary);line-height:var(--leading-normal);font-size:var(--text-sm);font-weight:var(--weight-medium)}
+.form-page{padding:24px;max-width:740px}
+.two-columns{gap:16px}
+.join-title{color:var(--ink);font-weight:var(--weight-bold)}
+
+/* ============================================================
+   弹窗
+   ============================================================ */
+dialog{
+ color:var(--ink);background:var(--surface);border:1px solid var(--line);
+ border-radius:var(--radius-md);box-shadow:var(--shadow);
+ padding:24px;max-height:calc(100dvh - 40px);overflow:auto
+}
+dialog::backdrop{background:rgba(36,26,18,.44);backdrop-filter:blur(6px)}
+.dialog-head h2{color:var(--ink);line-height:var(--leading-snug);font-weight:var(--weight-bold)}
+.close{background:var(--surface-soft);color:var(--ink-secondary);border:1px solid var(--line);width:30px;height:30px}
+.close:hover{background:var(--line);color:var(--ink)}
+
+.role-dialog{width:880px;max-width:calc(100vw - 32px);padding:40px;background:var(--surface)}
+.role-intro::before{content:"";display:block;width:92px;height:78px;background:url('./brand-mascot.webp') center/contain no-repeat;margin:-6px auto 10px}
+.role-brand{color:var(--ink);font-size:var(--text-xl);font-weight:var(--weight-bold)}
+.role-eyebrow{color:var(--muted)}
+.role-intro h1{color:var(--ink);font-size:var(--text-xl);font-weight:var(--weight-bold)}
+.role-intro>p:last-child{color:var(--muted)}
+.role-options{gap:12px}
+.role-options>button{
+ border:1px solid var(--line);border-radius:var(--radius-sm);padding:24px 16px;
+ box-shadow:var(--shadow);color:var(--ink);background:var(--surface);
+ transition:border-color var(--dur-fast) ease,box-shadow var(--dur-base) ease,translate var(--dur-base) ease
+}
+.role-options>button:hover{border-color:var(--brand);box-shadow:var(--shadow-lift);background:var(--surface)}
+.role-icon{
+ background:var(--surface-soft);border:1px solid var(--line);width:68px;height:68px;
+ border-radius:var(--radius-md);font-size:var(--text-3xl);display:grid;place-items:center
+}
+.role-action{color:var(--brand-ink);font-weight:var(--weight-semibold)}
+.role-description,.role-note{color:var(--muted)}
+.role-cancel{background:var(--surface-soft);color:var(--ink-secondary);border:1px solid var(--line);border-radius:var(--radius-pill)}
+
+.login-dialog{background:var(--surface);padding:32px;border-radius:var(--radius-md)}
+.login-dialog .secondary{background:var(--surface-soft)}
+.login-dialog .primary{border-radius:var(--radius-sm)}
+.login-dialog .description{font-size:var(--text-sm)}
+.location-dialog,.student-dialog{background:var(--surface)}
+.admission-status{background:var(--brand-tint);color:var(--brand-ink);border:1px solid var(--brand-line);border-radius:var(--radius-xs)}
+
+/* ============================================================
+   订单 / 表格
+   ============================================================ */
+.order{padding:20px;border-radius:var(--radius-sm)}
+.order:last-child{margin-bottom:28px}
+.order-meta{color:var(--ink-secondary);line-height:var(--leading-relaxed)}
+
+/* 订单卡改两栏：左侧信息流，右侧价格与操作。
+   原来 price 单独漂在右下角，与左侧内容之间留出大片空洞。 */
+.order{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:start}
+.order-top{grid-column:1/-1}
+.order h3{grid-column:1;margin:0 0 8px}
+.order-meta{grid-column:1;font-size:var(--text-sm)}
+/* 右列给悬浮助手球让出竖向通道，避免滚动时压住价格与操作按钮 */
+.order-actions{grid-column:2;grid-row:2/span 2;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:12px;align-self:stretch;height:100%;padding-right:56px}
+.order-actions .price{align-self:flex-end;margin-top:auto}
+/* 状态徽标改用中性底 + 圆点，橙色只留给价格这一处动作信号 */
+.status{
+ display:inline-flex;align-items:center;gap:6px;
+ color:var(--ink-secondary);font-weight:var(--weight-medium);
+ background:var(--surface-soft);border:1px solid var(--line);
+ border-radius:var(--radius-pill);padding:3px 10px;font-size:var(--text-2xs)
+}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted);flex:0 0 auto}
+/* 状态语义：只有"需要你行动"的才用暖色点 */
+.status:where(:has(+ *))::before{background:var(--muted)}
+
+.table-wrap{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+th{background:var(--canvas-soft);color:var(--ink-secondary);font-weight:var(--weight-semibold);font-size:var(--text-xs);letter-spacing:.4px;text-transform:uppercase}
+td,th{border-color:var(--line)}
+td{font-variant-numeric:tabular-nums}
+td button{background:var(--surface-soft);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius-xs)}
+td button:hover{background:var(--brand);border-color:var(--brand);color:var(--ink)}
+
+/* ============================================================
+   考试 / 学业规划模块
+   ============================================================ */
+.gk-uni,.ex-card,.ex-org,.ex-course,.ex-book,.gk-rank-card,.ex-stat{
+ border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);border-radius:var(--radius-sm)
+}
+.gk-filters,.ex-filters{background:var(--canvas-soft);border:1px solid var(--line);border-radius:var(--radius-md)}
+.gk-rec,.ex-match,.gk-plan,.ex-plan,.ex-res{background:var(--surface-soft);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.gk-line-value,.gk-prob-num,.ex-stat-main .ex-stat-value,.ex-price{color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.gk-skeleton,.ex-skeleton{border-color:var(--line);background:var(--surface-soft);color:var(--muted)}
+.gk-spinner,.ex-spinner{border-color:var(--line);border-top-color:var(--brand)}
+.gk-current-row,.gk-current-tag{background:var(--brand-tint)}
+.gk-current-tag{color:var(--brand-ink);border-radius:var(--radius-pill)}
+.ex-tabs button.active{background:var(--brand-tint);color:var(--ink);border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.ex-tab-count{font-variant-numeric:tabular-nums}
+.gk-bucket-head strong,.ex-bucket-head strong{border-radius:var(--radius-xs)}
+
+/* ============================================================
+   页脚 / 提示
+   ============================================================ */
+.footer{
+ color:var(--mute-soft);line-height:var(--leading-relaxed);font-size:var(--text-2xs);
+ border-top:1px solid var(--line);padding-top:20px;margin-top:32px
+}
+#toast{
+ background:var(--ink);border:1px solid rgba(255,255,255,.10);
+ border-radius:var(--radius-sm);box-shadow:var(--shadow);
+ max-width:calc(100vw - 32px);text-align:center;line-height:var(--leading-normal);color:#fff;font-size:var(--text-sm)
+}
+
+/* ============================================================
+   发现页 / 推荐
+   ============================================================ */
+.discovery-intro{padding:18px 22px;background:var(--canvas-soft);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:16px}
+.discovery-intro h2{font-size:var(--text-lg);margin:4px 0 0;text-wrap:balance}
+.discovery-paths{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.discovery-paths button{
+ border:1px solid var(--line-strong);border-radius:var(--radius-xs);
+ background:var(--surface);color:var(--ink);padding:10px 16px;font-size:var(--text-sm);font-weight:var(--weight-medium)
+}
+.discovery-paths button:hover{border-color:var(--brand);color:var(--brand-ink)}
+.discovery-tabs{display:flex;gap:4px;padding:4px;background:var(--canvas-soft);border:1px solid var(--line);border-radius:var(--radius-pill);margin:10px 0 16px}
+.discovery-tabs button{flex:1;min-height:40px;border-radius:var(--radius-pill);background:transparent;border:0;color:var(--ink-secondary);font-size:var(--text-sm);font-weight:var(--weight-medium)}
+.discovery-tabs button.active{background:var(--ink);color:#fff;font-weight:var(--weight-semibold)}
+.discovery-section{margin-top:24px}
+.discovery-section .section-head h3{font-size:var(--text-lg);margin:0 0 4px;font-weight:var(--weight-bold)}
+
+.course-recommendation{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:6px 0 8px;font-size:var(--text-sm);line-height:var(--leading-snug)}
+.recommendation-stars{color:var(--brand-ink);letter-spacing:.5px;font-size:var(--text-sm)}
+.course-recommendation strong{color:var(--ink);font-size:var(--text-sm);font-weight:var(--weight-semibold)}
+.recommendation-label{color:var(--muted);font-size:var(--text-2xs)}
+.sample-tag{
+ display:inline-flex;align-items:center;border:1px solid var(--brand-line);
+ color:var(--brand-ink);background:var(--brand-tint);border-radius:var(--radius-pill);
+ padding:4px 10px;font-size:var(--text-xs);line-height:var(--leading-snug);font-weight:var(--weight-semibold)
+}
+
+/* ============================================================
+   Hero：与品牌欢迎区统一为咖啡墨深底，橙色只留给 CTA
+   ============================================================ */
+.hero{background:var(--ink);border-radius:var(--radius-lg);color:#fff}
+.hero h2,.hero p{color:#fff}
+.hero .eyebrow{color:#cbb8a6}
+.hero .primary{background:var(--brand);color:var(--ink);border:1px solid transparent}
+.hero .primary:hover{background:#e8641a}
+.art-disc{background:rgba(243,112,33,.16)}
+.float-label{color:var(--ink-secondary)}
+.plant{filter:none}
+
+@media(hover:hover){
+ .card:hover{transform:translateY(-3px)}
+ .quick:hover{border-color:var(--line-strong);box-shadow:var(--shadow-lift)}
+}
+@media(min-width:1600px){
+ .brand-welcome{min-height:262px;padding:40px 40px;grid-template-columns:1fr 300px}
+ .brand-mascot{width:262px}
+ .content{padding-top:32px}
+ .brand-orbit{width:226px;height:226px}
+ .brand-welcome p{font-size:var(--text-base)}
+}
+
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .brand-mascot{opacity:1;transform:none}
+ .card:hover,.role-options>button:hover{transform:none}
+}
+
+/* 同一页面出现两组筛选标签时，用距离区分「不同维度」而不是同一组换行 */
+.site-tabs + .site-tabs{margin-top:8px}
+.site-tabs{align-items:center}
+.site-tabs button{min-height:34px}
+
+/* 结果很少时不要让单卡被拉伸到全宽：限制卡片最大宽度并保持左对齐 */
+.cards > .card{max-width:420px}
+.cards{gap:16px}

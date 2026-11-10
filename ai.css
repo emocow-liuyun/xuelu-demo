@@ -1,0 +1,43 @@
+/* 「AI 学习」整页样式：基于提供的 AI 学习页源码，按本站爱马仕橙主题与 PC 布局调整。 */
+.ai-page{display:flex;flex-direction:column;height:calc(100vh - 300px);min-height:540px;background:var(--surface,#fff);border:1px solid var(--line,#efdccb);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow,0 12px 30px #d6631520)}
+.ai-head{display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--brand-gradient);color:#fff}
+.ai-avatar{width:42px;height:42px;border-radius:50%;background:#fff;object-fit:contain;padding:3px;flex:0 0 auto}
+.ai-head-text{flex:1;min-width:0}
+.ai-head-text h2{margin:0;font-size:var(--text-md);font-weight:var(--weight-bold);letter-spacing:.5px}
+.ai-head-text p{margin:3px 0 0;font-size:var(--text-xs);opacity:.88}
+.ai-icon-btn{background:#ffffff2e;border:0;color:#fff;border-radius:var(--radius-pill);padding:6px 12px;font-size:var(--text-sm);cursor:pointer;white-space:nowrap}
+.ai-icon-btn:hover{background:#ffffff4d}
+.ai-icon-btn:disabled{opacity:.45;cursor:default}
+.ai-keybox{padding:16px 20px;background:#fffaf3;border-bottom:1px solid var(--line,#efdccb);display:flex;flex-direction:column;gap:10px}
+.ai-keybox label{display:flex;flex-direction:column;gap:4px;font-size:var(--text-xs);color:var(--ink-secondary,#795d48)}
+.ai-keybox input{border:1px solid #efdac4;border-radius:var(--radius-xs);padding:8px 12px;font-size:var(--text-sm);background:#fff;outline:none;min-height:20px}
+.ai-keybox input:focus{border-color:var(--brand-light)}
+.ai-keyactions{display:flex;gap:8px}
+.ai-keyactions .primary{min-height:36px;padding:6px 16px}
+.ai-tip{margin:0;font-size:var(--text-xs);color:var(--muted,#8a7563);line-height:var(--leading-normal)}
+.ai-body{flex:1;overflow-y:auto;padding:20px;background:#fffbf7;display:flex;flex-direction:column;gap:12px}
+.ai-body::-webkit-scrollbar{width:6px}
+.ai-body::-webkit-scrollbar-thumb{background:#f3d9c6;border-radius:var(--radius-xs)}
+.ai-welcome{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 12px;gap:8px}
+.ai-welcome img{width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 12px 14px #9f3d1624)}
+.ai-welcome h2{margin:6px 0 0;font-size:var(--text-lg);color:var(--ink,#47372b)}
+.ai-welcome p{margin:0;font-size:var(--text-sm);color:var(--muted,#8a7563);line-height:var(--leading-relaxed)}
+.ai-note{margin:6px 0 0;font-size:var(--text-xs);color:var(--muted)}
+.ai-suggests{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-top:16px;width:100%;max-width:660px}
+.ai-suggests button{background:#fff;border:1px solid #ffe0c7;color:#a85c29;border-radius:var(--radius-sm);padding:10px 12px;font-size:var(--text-sm);text-align:left;cursor:pointer;transition:background-color var(--dur-fast),border-color var(--dur-fast),transform var(--dur-fast),box-shadow var(--dur-fast)}
+.ai-suggests button:hover{background:#fff4e9;border-color:var(--brand);color:var(--brand-ink);transform:translateY(-2px);box-shadow:0 8px 16px #f370211a}
+.ai-row{display:flex;gap:8px;align-items:flex-start;max-width:86%}
+.ai-row.me{align-self:flex-end;flex-direction:row-reverse}
+.ai-mini{width:30px;height:30px;border-radius:50%;background:#fff4e9;object-fit:contain;padding:2px;flex:0 0 auto}
+.ai-bubble{background:#fff;border:1px solid #f3e8dc;color:#3a3a3a;border-radius:var(--radius-md);border-top-left-radius:5px;padding:10px 12px;font-size:var(--text-base);line-height:var(--leading-normal);white-space:pre-wrap;word-break:break-word}
+.ai-row.me .ai-bubble{background:var(--brand-gradient);border-color:transparent;color:#fff;border-radius:var(--radius-md);border-top-right-radius:5px}
+.ai-typing{color:var(--muted)}
+.ai-go{display:inline-flex;align-items:center;gap:4px;margin:8px 6px 0;background:#fff4e9;border:1.5px solid var(--brand);color:var(--brand-ink);border-radius:var(--radius-pill);padding:4px 12px;font-size:var(--text-sm);font-weight:var(--weight-semibold);cursor:pointer}
+.ai-go:hover{background:var(--brand);color:#fff}
+.ai-form{display:flex;gap:10px;padding:12px 20px;background:#fff;border-top:1px solid var(--line,#efdccb)}
+.ai-form input{flex:1;min-width:0;border:1px solid #efdac4;border-radius:var(--radius-sm);padding:10px 12px;font-size:var(--text-base);background:#fffcf9;outline:none;min-height:20px}
+.ai-form input:focus{border-color:var(--brand-light);box-shadow:0 0 0 3px #f3702110}
+.ai-form .primary{border:0;background:var(--brand-gradient);color:#fff;border-radius:var(--radius-sm);padding:0 24px;font-size:var(--text-base);font-weight:var(--weight-semibold);cursor:pointer;min-height:42px}
+.ai-form .primary:hover{filter:brightness(1.05)}
+.ai-form .primary:disabled{opacity:.5;cursor:wait}
+@media(prefers-reduced-motion:reduce){.ai-suggests button,.ai-go{transition:none}}

@@ -1,0 +1,76 @@
+/* 暖色玻璃交互层：纯装饰，层级在内容之下。
+   纪律：玻璃只用于「浮层」——导航托盘、搜索框、按钮高光。
+   不做pointer跟随的全局装饰，不引入新色相，只用 --brand 的低透明度。 */
+:root{
+ --glass-line:rgba(255,255,255,.9);
+ --glass-shadow:var(--shadow);
+}
+
+.glass-surface,.glass-button{position:relative;isolation:isolate;--glass-x:50%;--glass-y:50%}
+
+.glass-surface::before,.glass-button::before{
+ content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;opacity:0;
+ background:radial-gradient(110px circle at var(--glass-x) var(--glass-y),rgba(255,255,255,.7),rgba(251,231,212,.26) 52%,transparent 78%);
+ transition:opacity .4s ease-out
+}
+.glass-surface.glass-tracking::before,.glass-button.glass-tracking::before{opacity:.7;transition:opacity .12s ease-out}
+.glass-button:focus-visible::before{opacity:.5;background:linear-gradient(145deg,rgba(255,255,255,.42),transparent 72%)}
+.glass-button{transition:background-color var(--dur-fast) ease,border-color var(--dur-fast) ease,box-shadow var(--dur-base) ease,opacity var(--dur-fast) ease,transform var(--dur-base) cubic-bezier(.2,.8,.2,1)}
+.glass-button.glass-pressed:not(:disabled){transform:translateY(1px) scale(.985);box-shadow:inset 0 2px 6px rgba(36,26,18,.10)}
+.glass-button.glass-pressed::before{opacity:.9}
+
+/* DOCK：保留侧栏位置与图标文字，只把托盘做成玻璃层 */
+.nav.glass-surface{
+ padding:8px 6px;border:1px solid var(--line);border-radius:var(--radius-md);
+ background:var(--surface);box-shadow:var(--shadow);
+ backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);
+ gap:2px
+}
+.nav.glass-surface::before{
+ background:radial-gradient(150px circle at var(--glass-x) var(--glass-y),rgba(255,255,255,.9),rgba(243,112,33,.10) 56%,transparent 82%)
+}
+.nav .glass-button{min-width:0;border-radius:var(--radius-xs);background:transparent;border-color:transparent;box-shadow:var(--shadow)}
+.nav .glass-button:hover{background:var(--canvas-soft);color:var(--ink)}
+.nav .glass-button.active{
+ background:var(--brand-tint);border:1px solid var(--brand-line);
+ box-shadow:inset 2px 0 0 var(--brand);color:var(--brand-ink);font-weight:var(--weight-semibold)
+}
+.nav .glass-button span{position:relative;z-index:1}
+
+/* 搜索：结构保持原样，只做表面处理 */
+.search.glass-surface{
+ background:var(--surface);border:1px solid var(--line);
+ box-shadow:var(--shadow);backdrop-filter:blur(12px) saturate(120%);
+ -webkit-backdrop-filter:blur(12px) saturate(120%);
+ border-radius:var(--radius-pill)
+}
+.search.glass-surface::before{
+ background:radial-gradient(170px circle at var(--glass-x) var(--glass-y),rgba(255,255,255,.95),rgba(243,112,33,.08) 56%,transparent 82%)
+}
+.search.glass-surface:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px rgba(243,112,33,.12),var(--shadow)}
+
+/* 选中态高光扫过：一次性动画，不做循环，减少动态效果时自动关闭 */
+.glass-all::after{
+ content:"";position:absolute;inset:-90% -65%;pointer-events:none;z-index:-1;opacity:0;
+ background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.68) 49%,rgba(255,255,255,.2) 56%,transparent 65%);
+ transform:translateX(-48%) rotate(-8deg)
+}
+.glass-all.active::after,.glass-all[aria-selected="true"]::after{
+ animation:glass-reflection 2.4s cubic-bezier(.25,.6,.3,1) 1 both
+}
+@keyframes glass-reflection{
+ 0%{opacity:0;transform:translateX(-48%) rotate(-8deg)}
+ 22%{opacity:.75}78%{opacity:.45}
+ 100%{opacity:0;transform:translateX(48%) rotate(-8deg)}
+}
+
+/* 无 backdrop-filter 的浏览器：给不透明表面，不能变成不可读的透明层 */
+@supports not (backdrop-filter:blur(1px)){
+ .nav.glass-surface{background:var(--surface)}
+ .search.glass-surface{background:var(--surface)}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .glass-all::after{animation:none!important;opacity:0!important}
+ .glass-surface::before,.glass-button::before{transition:none!important;opacity:0!important}
+}

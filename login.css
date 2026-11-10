@@ -1,0 +1,2 @@
+.login-dialog{max-width:440px;padding:32px}.login-dialog form{gap:16px}.login-dialog .primary{min-height:46px}.login-dialog input{min-height:44px;width:100%}.login-dialog .error{font-size:var(--text-sm);line-height:var(--leading-relaxed)}.login-dialog>p:last-child{line-height:var(--leading-relaxed);font-size:var(--text-xs)}.account-logout[hidden]{display:none}.admission-status{line-height:var(--leading-relaxed)}
+.account-signin[hidden]{display:none}
